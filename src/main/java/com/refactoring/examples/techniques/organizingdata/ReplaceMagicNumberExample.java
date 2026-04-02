@@ -1,0 +1,90 @@
+package com.refactoring.examples.techniques.organizingdata;
+
+public class ReplaceMagicNumberExample {
+
+    public static String getDescription() {
+        return "Replace Magic Number with Symbolic Constant: When you have a literal number with " +
+               "a special meaning, create a constant, name it after the meaning, and replace the " +
+               "number with it. Magic numbers make code mysterious and are hard to change " +
+               "consistently.";
+    }
+
+    public static String getBadCode() {
+        return """
+                // BAD: Magic numbers everywhere — what do 9.81, 3600, 12 mean?
+                double potentialEnergy(double mass, double height) {
+                    return mass * 9.81 * height;  // What is 9.81?
+                }
+
+                double hoursToSeconds(int hours) {
+                    return hours * 3600;           // Why 3600?
+                }
+
+                double annualToMonthly(double annual) {
+                    return annual / 12;            // Why 12?
+                }
+                """;
+    }
+
+    public static String getGoodCode() {
+        return """
+                // GOOD: Constants make the code self-documenting
+                static final double GRAVITATIONAL_CONSTANT   = 9.81;  // m/s²
+                static final int    SECONDS_PER_HOUR         = 3600;
+                static final int    MONTHS_PER_YEAR          = 12;
+
+                double potentialEnergy(double mass, double height) {
+                    return mass * GRAVITATIONAL_CONSTANT * height;
+                }
+
+                double hoursToSeconds(int hours) {
+                    return hours * SECONDS_PER_HOUR;
+                }
+
+                double annualToMonthly(double annual) {
+                    return annual / MONTHS_PER_YEAR;
+                }
+                """;
+    }
+
+    public static class BadExample {
+        public double potentialEnergy(double mass, double height) {
+            return mass * 9.81 * height;
+        }
+
+        public double circleArea(double radius) {
+            return 3.14159265358979 * radius * radius;
+        }
+
+        public double annualToMonthly(double annual) {
+            return annual / 12;
+        }
+
+        public boolean isAdult(int age) {
+            return age >= 18;
+        }
+    }
+
+    public static class GoodExample {
+        private static final double GRAVITATIONAL_CONSTANT = 9.81;
+        private static final double PI                     = Math.PI;
+        private static final int    MONTHS_PER_YEAR        = 12;
+        private static final int    LEGAL_ADULT_AGE        = 18;
+
+        public double potentialEnergy(double mass, double height) {
+            return mass * GRAVITATIONAL_CONSTANT * height;
+        }
+
+        public double circleArea(double radius) {
+            return PI * radius * radius;
+        }
+
+        public double annualToMonthly(double annual) {
+            return annual / MONTHS_PER_YEAR;
+        }
+
+        public boolean isAdult(int age) {
+            return age >= LEGAL_ADULT_AGE;
+        }
+    }
+}
