@@ -24,7 +24,7 @@
         <div class="technique-header">
             <span class="badge" th:text="${comparison.category}">Category</span>
             <h1 class="technique-title" th:text="${comparison.name}">Technique Name</h1>
-            <p>Analyze how this technique improves code quality, readability, and maintainability.</p>
+            <p th:text="${comparison.description}">Analyze how this technique improves code quality, readability, and maintainability.</p>
         </div>
 
         <div class="comparison-container">

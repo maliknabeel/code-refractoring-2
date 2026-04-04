@@ -71,7 +71,7 @@ public class TechniquesController {
         return getAllTechniques().stream()
                 .filter(t -> toSlug(t.getName()).equals(technique))
                 .findFirst()
-                .map(t -> new RefactoringCodeComparison(t.getName(), t.getCategory(), t.getBadCode(), t.getGoodCode()))
+                .map(t -> new RefactoringCodeComparison(t.getName(), t.getCategory(), t.getDescription(), t.getBadCode(), t.getGoodCode()))
                 .orElseThrow(() -> new IllegalArgumentException("Technique not found: " + technique));
     }
 

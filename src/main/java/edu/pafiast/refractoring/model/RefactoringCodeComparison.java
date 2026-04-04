@@ -4,17 +4,22 @@ public class RefactoringCodeComparison {
 
     private String name;
     private String category;
+    private String description;
     private String badCode;
     private String goodCode;
 
     public RefactoringCodeComparison() {}
 
-    public RefactoringCodeComparison(String name, String category, String badCode, String goodCode) {
+    public RefactoringCodeComparison(String name, String category, String description, String badCode, String goodCode) {
         this.name = name;
         this.category = category;
+        this.description = description;
         this.badCode = badCode;
         this.goodCode = goodCode;
     }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
