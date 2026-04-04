@@ -1,11 +1,12 @@
 package com.refactoring.examples.controller;
 
+import com.refactoring.examples.model.RefactoringCodeComparison;
 import com.refactoring.examples.model.RefactoringTechniqueResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/techniques")
@@ -44,5 +45,37 @@ public class TechniquesController {
         all.addAll(simplifyingMethodCalls.getAllTechniques());
         all.addAll(dealingWithGeneralization.getAllTechniques());
         return all;
+    }
+
+    @GetMapping("/categories")
+    public Map<String, List<String>> getCategories() {
+        Map<String, List<String>> categories = new LinkedHashMap<>();
+        for (RefactoringTechniqueResponse t : getAllTechniques()) {
+            categories.computeIfAbsent(t.getCategory(), k -> new ArrayList<>()).add(t.getName());
+        }
+        return categories;
+    }
+
+    @GetMapping("/search")
+    public List<RefactoringTechniqueResponse> search(@RequestParam String q) {
+        String query = q.toLowerCase(Locale.ROOT);
+        return getAllTechniques().stream()
+                .filter(t -> t.getName().toLowerCase(Locale.ROOT).contains(query)
+                        || t.getDescription().toLowerCase(Locale.ROOT).contains(query)
+                        || t.getCategory().toLowerCase(Locale.ROOT).contains(query))
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{technique}/comparison")
+    public RefactoringCodeComparison getComparison(@PathVariable String technique) {
+        return getAllTechniques().stream()
+                .filter(t -> toSlug(t.getName()).equals(technique))
+                .findFirst()
+                .map(t -> new RefactoringCodeComparison(t.getName(), t.getCategory(), t.getBadCode(), t.getGoodCode()))
+                .orElseThrow(() -> new IllegalArgumentException("Technique not found: " + technique));
+    }
+
+    private static String toSlug(String name) {
+        return name.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]+", "-");
     }
 }
