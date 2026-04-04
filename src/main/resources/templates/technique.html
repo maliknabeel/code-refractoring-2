@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${comparison.techniqueName} + ' - Refactoring Lab'">Refactoring Technique</title>
+    <title th:text="${comparison.name} + ' - Refactoring Lab'">Refactoring Technique</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Prism.js for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
@@ -23,7 +23,7 @@
     <main class="container">
         <div class="technique-header">
             <span class="badge" th:text="${comparison.category}">Category</span>
-            <h1 class="technique-title" th:text="${comparison.techniqueName}">Technique Name</h1>
+            <h1 class="technique-title" th:text="${comparison.name}">Technique Name</h1>
             <p>Analyze how this technique improves code quality, readability, and maintainability.</p>
         </div>
 
@@ -45,9 +45,12 @@
                 <div class="panel-header good">
                     <span class="panel-icon">✅</span>
                     <h3>After (Refactored)</h3>
-                    <button class="copy-btn" onclick="copyCode('good-code')">Copy</button>
+                    <button class="copy-btn" id="good-copy-btn" onclick="copyCode('good-code')" style="display: none;">Copy</button>
                 </div>
-                <div class="code-wrapper">
+                <div class="reveal-container" id="reveal-container">
+                    <button class="reveal-btn" onclick="revealGoodCode()">Show Refactored Code</button>
+                </div>
+                <div class="code-wrapper" id="good-code-wrapper" style="display: none;">
                     <pre><code class="language-java" id="good-code" th:text="${comparison.goodCode}">// Refactored code here</code></pre>
                 </div>
             </div>
@@ -74,6 +77,12 @@
                     btn.classList.remove('copied');
                 }, 2000);
             });
+        }
+
+        function revealGoodCode() {
+            document.getElementById('reveal-container').style.display = 'none';
+            document.getElementById('good-code-wrapper').style.display = 'block';
+            document.getElementById('good-copy-btn').style.display = 'block';
         }
     </script>
 </body>
