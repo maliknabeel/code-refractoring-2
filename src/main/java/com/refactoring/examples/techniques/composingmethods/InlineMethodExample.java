@@ -29,34 +29,4 @@ public class InlineMethodExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private int numberOfLateDeliveries;
-
-        public BadExample(int numberOfLateDeliveries) {
-            this.numberOfLateDeliveries = numberOfLateDeliveries;
-        }
-
-        public int getRating() {
-            return moreThanFiveLateDeliveries() ? 2 : 1;
-        }
-
-        // This method exists only to wrap a trivial boolean expression
-        private boolean moreThanFiveLateDeliveries() {
-            return numberOfLateDeliveries > 5;
-        }
-    }
-
-    public static class GoodExample {
-        private int numberOfLateDeliveries;
-
-        public GoodExample(int numberOfLateDeliveries) {
-            this.numberOfLateDeliveries = numberOfLateDeliveries;
-        }
-
-        // Inlined: the condition speaks for itself
-        public int getRating() {
-            return numberOfLateDeliveries > 5 ? 2 : 1;
-        }
-    }
 }

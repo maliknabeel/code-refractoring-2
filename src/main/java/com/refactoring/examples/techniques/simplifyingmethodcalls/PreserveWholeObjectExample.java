@@ -39,49 +39,7 @@ public class PreserveWholeObjectExample {
         private final int low;
         private final int high;
         public Room(int low, int high) { this.low = low; this.high = high; }
-        int getLow()  { return low; }
-        int getHigh() { return high; }
-    }
-
-    public static class BadExample {
-        public static class HeatingPlan {
-            private final int rangeMin;
-            private final int rangeMax;
-
-            public HeatingPlan(int rangeMin, int rangeMax) {
-                this.rangeMin = rangeMin;
-                this.rangeMax = rangeMax;
-            }
-
-            public boolean withinRange(int low, int high) { // receives fragments
-                return low >= rangeMin && high <= rangeMax;
-            }
-        }
-
-        public boolean checkRange(Room room, HeatingPlan plan) {
-            int low  = room.getLow();
-            int high = room.getHigh();
-            return plan.withinRange(low, high); // passing fragments
-        }
-    }
-
-    public static class GoodExample {
-        public static class HeatingPlan {
-            private final int rangeMin;
-            private final int rangeMax;
-
-            public HeatingPlan(int rangeMin, int rangeMax) {
-                this.rangeMin = rangeMin;
-                this.rangeMax = rangeMax;
-            }
-
-            public boolean withinRange(Room room) { // receives whole object
-                return room.getLow() >= rangeMin && room.getHigh() <= rangeMax;
-            }
-        }
-
-        public boolean checkRange(Room room, HeatingPlan plan) {
-            return plan.withinRange(room); // whole object passed
-        }
+        public int getLow()  { return low; }
+        public int getHigh() { return high; }
     }
 }

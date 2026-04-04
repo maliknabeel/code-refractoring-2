@@ -36,24 +36,4 @@ public class SplitTemporaryVariableExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public double[] computePhysics(double initialVelocity, double acceleration, double time) {
-            double temp = initialVelocity * time;             // distance calculation
-            double distance = temp + 0.5 * acceleration * time * time;
-            temp = initialVelocity + acceleration * time;     // velocity - temp reused!
-            double finalVelocity = temp;
-            return new double[]{distance, finalVelocity};
-        }
-    }
-
-    public static class GoodExample {
-        public double[] computePhysics(double initialVelocity, double acceleration, double time) {
-            double initialComponent = initialVelocity * time; // clear purpose
-            double distance = initialComponent + 0.5 * acceleration * time * time;
-
-            double finalVelocity = initialVelocity + acceleration * time; // separate variable
-            return new double[]{distance, finalVelocity};
-        }
-    }
 }

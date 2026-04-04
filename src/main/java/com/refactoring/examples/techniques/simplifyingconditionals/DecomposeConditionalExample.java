@@ -58,38 +58,10 @@ public class DecomposeConditionalExample {
             this.summerEndMonth   = summerEndMonth;
         }
 
-        LocalDate summerStart()     { return LocalDate.of(LocalDate.now().getYear(), summerStartMonth, 1); }
-        LocalDate summerEnd()       { return LocalDate.of(LocalDate.now().getYear(), summerEndMonth, 30); }
-        double    summerRate()      { return 1.5; }
-        double    winterRate()      { return 2.0; }
-        double    winterServiceCharge() { return 10.0; }
-    }
-
-    public static class BadExample {
-        public double getCharge(LocalDate date, int quantity, Plan plan) {
-            if (!date.isBefore(plan.summerStart()) && !date.isAfter(plan.summerEnd())) {
-                return quantity * plan.summerRate();
-            } else {
-                return quantity * plan.winterRate() + plan.winterServiceCharge();
-            }
-        }
-    }
-
-    public static class GoodExample {
-        private boolean isSummer(LocalDate date, Plan plan) {
-            return !date.isBefore(plan.summerStart()) && !date.isAfter(plan.summerEnd());
-        }
-
-        private double summerCharge(int quantity, Plan plan) {
-            return quantity * plan.summerRate();
-        }
-
-        private double winterCharge(int quantity, Plan plan) {
-            return quantity * plan.winterRate() + plan.winterServiceCharge();
-        }
-
-        public double getCharge(LocalDate date, int quantity, Plan plan) {
-            return isSummer(date, plan) ? summerCharge(quantity, plan) : winterCharge(quantity, plan);
-        }
+        public LocalDate summerStart()     { return LocalDate.of(LocalDate.now().getYear(), summerStartMonth, 1); }
+        public LocalDate summerEnd()       { return LocalDate.of(LocalDate.now().getYear(), summerEndMonth, 30); }
+        public double    summerRate()      { return 1.5; }
+        public double    winterRate()      { return 2.0; }
+        public double    winterServiceCharge() { return 10.0; }
     }
 }

@@ -27,29 +27,4 @@ public class ReplaceParameterWithExplicitMethodsExample {
                 void setWidth(int width)   { this.width  = width; }
                 """;
     }
-
-    public static class BadExample {
-        private int height;
-        private int width;
-
-        public void setValue(String type, int amount) {
-            if ("height".equals(type))      height = amount;
-            else if ("width".equals(type))  width  = amount;
-            else throw new IllegalArgumentException("Unknown type: " + type);
-        }
-
-        public int getHeight() { return height; }
-        public int getWidth()  { return width; }
-    }
-
-    public static class GoodExample {
-        private int height;
-        private int width;
-
-        public void setHeight(int height) { this.height = height; }
-        public void setWidth(int width)   { this.width  = width; }
-
-        public int getHeight() { return height; }
-        public int getWidth()  { return width; }
-    }
 }

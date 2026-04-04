@@ -55,34 +55,4 @@ public class EncapsulateCollectionExample {
         public Course(String name) { this.name = name; }
         public String getName() { return name; }
     }
-
-    public static class BadExample {
-        public static class Person {
-            private List<Course> courses = new ArrayList<>();
-
-            public List<Course> getCourses() { return courses; } // exposes live list
-
-            public void setCourses(List<Course> courses) { this.courses = courses; }
-        }
-    }
-
-    public static class GoodExample {
-        public static class Person {
-            private final List<Course> courses = new ArrayList<>();
-
-            public List<Course> getCourses() {
-                return Collections.unmodifiableList(courses); // safe view
-            }
-
-            public void addCourse(Course course) {
-                courses.add(course);
-            }
-
-            public boolean removeCourse(Course course) {
-                return courses.remove(course);
-            }
-
-            public int getCourseCount() { return courses.size(); }
-        }
-    }
 }

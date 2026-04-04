@@ -26,26 +26,4 @@ public class InlineTempExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public boolean isExpensive(double basePrice) {
-            double price = basePrice * 1.1; // temp used only once
-            return price > 1000;
-        }
-
-        public String applyDiscount(double basePrice, double discountRate) {
-            double discountedPrice = basePrice * (1 - discountRate); // temp used only once
-            return "Final price: " + discountedPrice;
-        }
-    }
-
-    public static class GoodExample {
-        public boolean isExpensive(double basePrice) {
-            return (basePrice * 1.1) > 1000; // inlined
-        }
-
-        public String applyDiscount(double basePrice, double discountRate) {
-            return "Final price: " + (basePrice * (1 - discountRate)); // inlined
-        }
-    }
 }

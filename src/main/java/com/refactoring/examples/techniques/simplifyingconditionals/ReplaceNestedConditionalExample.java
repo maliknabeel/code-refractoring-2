@@ -45,53 +45,14 @@ public class ReplaceNestedConditionalExample {
     }
 
     public static class Employee {
-        boolean isDead;
-        boolean isSeparated;
-        boolean isRetired;
+        public boolean isDead;
+        public boolean isSeparated;
+        public boolean isRetired;
 
         public Employee(boolean isDead, boolean isSeparated, boolean isRetired) {
             this.isDead = isDead;
             this.isSeparated = isSeparated;
             this.isRetired = isRetired;
-        }
-    }
-
-    public static class BadExample {
-        private double deadAmount()     { return 0; }
-        private double separatedAmount(){ return 500; }
-        private double retiredAmount()  { return 1000; }
-        private double normalPayAmount(){ return 3000; }
-
-        public double getPayAmount(Employee e) {
-            double result;
-            if (e.isDead) {
-                result = deadAmount();
-            } else {
-                if (e.isSeparated) {
-                    result = separatedAmount();
-                } else {
-                    if (e.isRetired) {
-                        result = retiredAmount();
-                    } else {
-                        result = normalPayAmount();
-                    }
-                }
-            }
-            return result;
-        }
-    }
-
-    public static class GoodExample {
-        private double deadAmount()     { return 0; }
-        private double separatedAmount(){ return 500; }
-        private double retiredAmount()  { return 1000; }
-        private double normalPayAmount(){ return 3000; }
-
-        public double getPayAmount(Employee e) {
-            if (e.isDead)      return deadAmount();
-            if (e.isSeparated) return separatedAmount();
-            if (e.isRetired)   return retiredAmount();
-            return normalPayAmount();
         }
     }
 }

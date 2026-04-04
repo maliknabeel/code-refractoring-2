@@ -33,33 +33,4 @@ public class IntroduceForeignMethodExample {
                 Date newStart = nextDay(previousEnd);
                 """;
     }
-
-    public static class BadExample {
-        @SuppressWarnings("deprecation")
-        public String scheduleNextMeeting(int year, int month, int day) {
-            // Duplicated inline date arithmetic — no reusable helper
-            int nextDay = day + 1;
-            int nextMonth = month;
-            int nextYear = year;
-            if (nextDay > 30) { nextDay = 1; nextMonth++; }
-            if (nextMonth > 11) { nextMonth = 0; nextYear++; }
-            return nextYear + "-" + String.format("%02d", nextMonth + 1) + "-" + String.format("%02d", nextDay);
-        }
-    }
-
-    public static class GoodExample {
-        // Foreign method introduced on the client — can't change the library class
-        private String nextDay(int year, int month, int day) {
-            int nd = day + 1;
-            int nm = month;
-            int ny = year;
-            if (nd > 30) { nd = 1; nm++; }
-            if (nm > 11) { nm = 0; ny++; }
-            return ny + "-" + String.format("%02d", nm + 1) + "-" + String.format("%02d", nd);
-        }
-
-        public String scheduleNextMeeting(int year, int month, int day) {
-            return nextDay(year, month, day); // clean call using the foreign method
-        }
-    }
 }

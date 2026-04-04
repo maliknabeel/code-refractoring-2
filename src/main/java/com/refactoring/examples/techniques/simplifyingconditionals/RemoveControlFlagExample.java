@@ -37,37 +37,4 @@ public class RemoveControlFlagExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private boolean alertSent = false;
-
-        private void sendAlert() { alertSent = true; }
-
-        public boolean checkSecurity(String[] people) {
-            boolean found = false;
-            for (String person : people) {
-                if (!found) {
-                    if (person.equals("Don")  ) { sendAlert(); found = true; }
-                    if (person.equals("John") ) { sendAlert(); found = true; }
-                }
-            }
-            return alertSent;
-        }
-    }
-
-    public static class GoodExample {
-        private boolean alertSent = false;
-
-        private void sendAlert() { alertSent = true; }
-
-        public boolean checkSecurity(String[] people) {
-            for (String person : people) {
-                if (person.equals("Don") || person.equals("John")) {
-                    sendAlert();
-                    return true; // explicit early return
-                }
-            }
-            return false;
-        }
-    }
 }

@@ -38,28 +38,4 @@ public class SubstituteAlgorithmExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public String foundPerson(String[] people) {
-            for (String person : people) {
-                if (person.equals("Don"))  return "Don";
-                if (person.equals("John")) return "John";
-                if (person.equals("Kent")) return "Kent";
-            }
-            return "";
-        }
-    }
-
-    public static class GoodExample {
-        private static final List<String> CANDIDATES = List.of("Don", "John", "Kent");
-
-        public String foundPerson(String[] people) {
-            for (String person : people) {
-                if (CANDIDATES.contains(person)) {
-                    return person;
-                }
-            }
-            return "";
-        }
-    }
 }

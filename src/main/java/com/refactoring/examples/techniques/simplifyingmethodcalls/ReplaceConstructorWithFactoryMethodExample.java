@@ -40,48 +40,4 @@ public class ReplaceConstructorWithFactoryMethodExample {
                 Employee e = Employee.createEngineer();  // self-documenting!
                 """;
     }
-
-    public static class BadExample {
-        public static class Employee {
-            static final int ENGINEER    = 0;
-            static final int SALESPERSON = 1;
-            static final int MANAGER     = 2;
-
-            private final int type;
-
-            public Employee(int type) { this.type = type; } // type code in constructor
-
-            public int getType() { return type; }
-            public String getTypeName() {
-                return switch (type) {
-                    case ENGINEER    -> "Engineer";
-                    case SALESPERSON -> "Salesperson";
-                    case MANAGER     -> "Manager";
-                    default -> "Unknown";
-                };
-            }
-        }
-    }
-
-    public static class GoodExample {
-        abstract public static class Employee {
-            public abstract String getTypeName();
-
-            public static Employee createEngineer()    { return new EngineerEmployee(); }
-            public static Employee createSalesperson() { return new SalespersonEmployee(); }
-            public static Employee createManager()     { return new ManagerEmployee(); }
-        }
-
-        private static class EngineerEmployee extends Employee {
-            @Override public String getTypeName() { return "Engineer"; }
-        }
-
-        private static class SalespersonEmployee extends Employee {
-            @Override public String getTypeName() { return "Salesperson"; }
-        }
-
-        private static class ManagerEmployee extends Employee {
-            @Override public String getTypeName() { return "Manager"; }
-        }
-    }
 }

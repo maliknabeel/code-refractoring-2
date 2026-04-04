@@ -43,42 +43,4 @@ public class ReplaceTempWithQueryExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private int quantity;
-        private double itemPrice;
-
-        public BadExample(int quantity, double itemPrice) {
-            this.quantity = quantity;
-            this.itemPrice = itemPrice;
-        }
-
-        public double getPrice() {
-            double basePrice = quantity * itemPrice;
-            double discountFactor = basePrice > 1000 ? 0.95 : 0.98;
-            return basePrice * discountFactor;
-        }
-    }
-
-    public static class GoodExample {
-        private int quantity;
-        private double itemPrice;
-
-        public GoodExample(int quantity, double itemPrice) {
-            this.quantity = quantity;
-            this.itemPrice = itemPrice;
-        }
-
-        public double getPrice() {
-            return basePrice() * discountFactor();
-        }
-
-        public double basePrice() {
-            return quantity * itemPrice;
-        }
-
-        public double discountFactor() {
-            return basePrice() > 1000 ? 0.95 : 0.98;
-        }
-    }
 }

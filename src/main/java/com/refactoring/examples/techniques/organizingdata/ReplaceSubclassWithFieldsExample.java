@@ -48,45 +48,4 @@ public class ReplaceSubclassWithFieldsExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        abstract public static class Person {
-            abstract boolean isMale();
-            abstract char    getCode();
-            abstract String  getLabel();
-        }
-
-        public static class Male extends Person {
-            @Override boolean isMale()  { return true; }
-            @Override char    getCode() { return 'M'; }
-            @Override String  getLabel(){ return "Male"; }
-        }
-
-        public static class Female extends Person {
-            @Override boolean isMale()  { return false; }
-            @Override char    getCode() { return 'F'; }
-            @Override String  getLabel(){ return "Female"; }
-        }
-    }
-
-    public static class GoodExample {
-        public static class Person {
-            private final boolean isMale;
-            private final char    code;
-            private final String  label;
-
-            public static Person createMale()   { return new Person(true,  'M', "Male"); }
-            public static Person createFemale() { return new Person(false, 'F', "Female"); }
-
-            private Person(boolean isMale, char code, String label) {
-                this.isMale = isMale;
-                this.code   = code;
-                this.label  = label;
-            }
-
-            public boolean isMale()  { return isMale; }
-            public char    getCode() { return code; }
-            public String  getLabel(){ return label; }
-        }
-    }
 }
