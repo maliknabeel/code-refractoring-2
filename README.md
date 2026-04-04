@@ -194,11 +194,23 @@ src/
 │   ├── model/               # Response models
 │   └── techniques/          # Refactoring example classes
 │       ├── composingmethods/
+│       │   ├── bad/         # Bad-code implementations (e.g. ExtractMethodBadExample)
+│       │   └── good/        # Good-code implementations (e.g. ExtractMethodGoodExample)
 │       ├── generalization/
+│       │   ├── bad/
+│       │   └── good/
 │       ├── movingfeatures/
+│       │   ├── bad/
+│       │   └── good/
 │       ├── organizingdata/
+│       │   ├── bad/
+│       │   └── good/
 │       ├── simplifyingconditionals/
+│       │   ├── bad/
+│       │   └── good/
 │       └── simplifyingmethodcalls/
+│           ├── bad/
+│           └── good/
 └── test/java/               # Unit tests per category
 ```
 
@@ -206,5 +218,7 @@ Each technique class (e.g. `ExtractMethodExample`) contains:
 - `getDescription()` — explanation of the technique
 - `getBadCode()` — code snippet illustrating the anti-pattern
 - `getGoodCode()` — code snippet illustrating the refactored solution
-- `BadExample` inner class — runnable bad-code implementation
-- `GoodExample` inner class — runnable good-code implementation
+
+The runnable implementations live in separate packages:
+- `<category>.bad.<TechniqueName>BadExample` — runnable bad-code implementation (e.g. `composingmethods.bad.ExtractMethodBadExample`)
+- `<category>.good.<TechniqueName>GoodExample` — runnable good-code implementation (e.g. `composingmethods.good.ExtractMethodGoodExample`)
