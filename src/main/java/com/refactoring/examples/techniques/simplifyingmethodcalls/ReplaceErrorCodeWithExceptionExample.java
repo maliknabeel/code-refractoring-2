@@ -43,42 +43,4 @@ public class ReplaceErrorCodeWithExceptionExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private double balance;
-
-        public BadExample(double balance) { this.balance = balance; }
-
-        public int withdraw(double amount) {
-            if (amount > balance) return -1; // error code
-            balance -= amount;
-            return 0; // success
-        }
-
-        public double getBalance() { return balance; }
-    }
-
-    public static class GoodExample {
-        public static class InsufficientFundsException extends Exception {
-            private final double shortfall;
-            public InsufficientFundsException(double shortfall) {
-                super("Insufficient funds. Shortfall: " + shortfall);
-                this.shortfall = shortfall;
-            }
-            double getShortfall() { return shortfall; }
-        }
-
-        private double balance;
-
-        public GoodExample(double balance) { this.balance = balance; }
-
-        public void withdraw(double amount) throws InsufficientFundsException {
-            if (amount > balance) {
-                throw new InsufficientFundsException(amount - balance);
-            }
-            balance -= amount;
-        }
-
-        public double getBalance() { return balance; }
-    }
 }

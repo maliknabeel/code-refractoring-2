@@ -39,27 +39,4 @@ public class RemoveAssignmentsToParametersExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public double applyTax(double price, String country) {
-            if (country.equals("US")) {
-                price *= 1.08;  // parameter modified!
-            } else if (country.equals("UK")) {
-                price *= 1.20;  // parameter modified again!
-            }
-            return price;
-        }
-    }
-
-    public static class GoodExample {
-        public double applyTax(double price, String country) {
-            double taxedPrice = price; // local variable, never touch the parameter
-            if (country.equals("US")) {
-                taxedPrice = price * 1.08;
-            } else if (country.equals("UK")) {
-                taxedPrice = price * 1.20;
-            }
-            return taxedPrice;
-        }
-    }
 }

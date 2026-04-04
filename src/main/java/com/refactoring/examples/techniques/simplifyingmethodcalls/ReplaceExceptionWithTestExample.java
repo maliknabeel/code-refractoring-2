@@ -31,25 +31,4 @@ public class ReplaceExceptionWithTestExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private double[] values = {10.0, 20.0, 30.0};
-
-        public double getValueForPeriod(int periodNumber) {
-            try {
-                return values[periodNumber];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return 0; // exception used for flow control
-            }
-        }
-    }
-
-    public static class GoodExample {
-        private double[] values = {10.0, 20.0, 30.0};
-
-        public double getValueForPeriod(int periodNumber) {
-            if (periodNumber < 0 || periodNumber >= values.length) return 0; // test first
-            return values[periodNumber];
-        }
-    }
 }

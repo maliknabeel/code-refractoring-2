@@ -36,38 +36,4 @@ public class PullUpMethodExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        abstract public static class Employee {
-            protected double annualSalary;
-            public Employee(double annualSalary) { this.annualSalary = annualSalary; }
-        }
-
-        public static class Salesperson extends Employee {
-            public Salesperson(double annualSalary) { super(annualSalary); }
-            public double getAnnualCost() { return annualSalary; } // duplicated
-        }
-
-        public static class Engineer extends Employee {
-            public Engineer(double annualSalary) { super(annualSalary); }
-            public double getAnnualCost() { return annualSalary; } // duplicated
-        }
-    }
-
-    public static class GoodExample {
-        abstract public static class Employee {
-            protected double annualSalary;
-            public Employee(double annualSalary) { this.annualSalary = annualSalary; }
-
-            public double getAnnualCost() { return annualSalary; } // pulled up
-        }
-
-        public static class Salesperson extends Employee {
-            public Salesperson(double annualSalary) { super(annualSalary); }
-        }
-
-        public static class Engineer extends Employee {
-            public Engineer(double annualSalary) { super(annualSalary); }
-        }
-    }
 }

@@ -60,49 +60,4 @@ public class ExtractMethodExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private String name = "John";
-        private double[] orderAmounts = {10.0, 20.0, 30.0};
-
-        public String printOwing() {
-            StringBuilder sb = new StringBuilder();
-            double outstanding = 0.0;
-            sb.append("*************************\n");
-            sb.append("***** Customer Owes *****\n");
-            sb.append("*************************\n");
-            for (double amount : orderAmounts) {
-                outstanding += amount;
-            }
-            sb.append("name: ").append(name).append("\n");
-            sb.append("amount: ").append(outstanding).append("\n");
-            return sb.toString();
-        }
-    }
-
-    public static class GoodExample {
-        private String name = "John";
-        private double[] orderAmounts = {10.0, 20.0, 30.0};
-
-        public String printOwing() {
-            return printBanner() + calculateAndPrintDetails();
-        }
-
-        private String printBanner() {
-            return "*************************\n***** Customer Owes *****\n*************************\n";
-        }
-
-        private double calculateOutstanding() {
-            double result = 0.0;
-            for (double amount : orderAmounts) {
-                result += amount;
-            }
-            return result;
-        }
-
-        private String calculateAndPrintDetails() {
-            double outstanding = calculateOutstanding();
-            return "name: " + name + "\namount: " + outstanding + "\n";
-        }
-    }
 }

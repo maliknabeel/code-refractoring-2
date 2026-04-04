@@ -1,6 +1,8 @@
 package com.refactoring.examples.techniques;
 
 import com.refactoring.examples.techniques.movingfeatures.*;
+import com.refactoring.examples.techniques.movingfeatures.bad.*;
+import com.refactoring.examples.techniques.movingfeatures.good.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,44 +11,44 @@ class MovingFeaturesTest {
 
     @Test
     void moveMethod_premiumAccount_chargesCorrectly() {
-        MoveMethodExample.GoodExample.AccountType premium = new MoveMethodExample.GoodExample.AccountType(true);
-        MoveMethodExample.GoodExample.Account account = new MoveMethodExample.GoodExample.Account(premium, 10);
+        MoveMethodExampleGoodExample.AccountType premium = new MoveMethodExampleGoodExample.AccountType(true);
+        MoveMethodExampleGoodExample.Account account = new MoveMethodExampleGoodExample.Account(premium, 10);
         assertEquals(10 + (10 - 7) * 0.85, account.overdraftCharge(), 0.001);
     }
 
     @Test
     void moveMethod_standardAccount_chargesPerDay() {
-        MoveMethodExample.GoodExample.AccountType standard = new MoveMethodExample.GoodExample.AccountType(false);
-        MoveMethodExample.GoodExample.Account account = new MoveMethodExample.GoodExample.Account(standard, 5);
+        MoveMethodExampleGoodExample.AccountType standard = new MoveMethodExampleGoodExample.AccountType(false);
+        MoveMethodExampleGoodExample.Account account = new MoveMethodExampleGoodExample.Account(standard, 5);
         assertEquals(5 * 1.75, account.overdraftCharge(), 0.001);
     }
 
     @Test
     void moveField_interestCalculation() {
-        MoveFieldExample.GoodExample.AccountType type = new MoveFieldExample.GoodExample.AccountType("Savings", 0.05);
-        MoveFieldExample.GoodExample.Account account = new MoveFieldExample.GoodExample.Account(type);
+        MoveFieldExampleGoodExample.AccountType type = new MoveFieldExampleGoodExample.AccountType("Savings", 0.05);
+        MoveFieldExampleGoodExample.Account account = new MoveFieldExampleGoodExample.Account(type);
         assertEquals(0.05 * 1000 * 30 / 365.0, account.interestForAmount(1000, 30), 0.001);
     }
 
     @Test
     void extractClass_telephoneFormat() {
-        ExtractClassExample.GoodExample.TelephoneNumber tel =
-            new ExtractClassExample.GoodExample.TelephoneNumber("021", "1234567");
+        ExtractClassExampleGoodExample.TelephoneNumber tel =
+            new ExtractClassExampleGoodExample.TelephoneNumber("021", "1234567");
         assertEquals("(021) 1234567", tel.getTelephoneNumber());
     }
 
     @Test
     void extractClass_personDelegates() {
-        ExtractClassExample.GoodExample.TelephoneNumber tel =
-            new ExtractClassExample.GoodExample.TelephoneNumber("021", "1234567");
-        ExtractClassExample.GoodExample.Person person =
-            new ExtractClassExample.GoodExample.Person("Alice", tel);
+        ExtractClassExampleGoodExample.TelephoneNumber tel =
+            new ExtractClassExampleGoodExample.TelephoneNumber("021", "1234567");
+        ExtractClassExampleGoodExample.Person person =
+            new ExtractClassExampleGoodExample.Person("Alice", tel);
         assertEquals("(021) 1234567", person.getTelephoneNumber());
     }
 
     @Test
     void inlineClass_formattedNumber() {
-        InlineClassExample.GoodExample.Person person = new InlineClassExample.GoodExample.Person();
+        InlineClassExampleGoodExample.Person person = new InlineClassExampleGoodExample.Person();
         person.setTelephoneAreaCode("021");
         person.setTelephoneNumber("1234567");
         assertEquals("(021) 1234567", person.getFormattedNumber());
@@ -54,34 +56,34 @@ class MovingFeaturesTest {
 
     @Test
     void hideDelegate_getManagerName() {
-        HideDelegateExample.GoodExample.Manager manager = new HideDelegateExample.GoodExample.Manager("Bob");
-        HideDelegateExample.GoodExample.Department dept = new HideDelegateExample.GoodExample.Department(manager);
-        HideDelegateExample.GoodExample.Person person = new HideDelegateExample.GoodExample.Person(dept);
-        HideDelegateExample.GoodExample good = new HideDelegateExample.GoodExample();
+        HideDelegateExampleGoodExample.Manager manager = new HideDelegateExampleGoodExample.Manager("Bob");
+        HideDelegateExampleGoodExample.Department dept = new HideDelegateExampleGoodExample.Department(manager);
+        HideDelegateExampleGoodExample.Person person = new HideDelegateExampleGoodExample.Person(dept);
+        HideDelegateExampleGoodExample good = new HideDelegateExampleGoodExample();
         assertEquals("Bob", good.getManagerName(person));
     }
 
     @Test
     void removeMiddleMan_directAccessToDepartment() {
-        RemoveMiddleManExample.GoodExample.Department dept =
-            new RemoveMiddleManExample.GoodExample.Department("Engineering", "Alice", 15);
-        RemoveMiddleManExample.GoodExample.Person person = new RemoveMiddleManExample.GoodExample.Person(dept);
+        RemoveMiddleManExampleGoodExample.Department dept =
+            new RemoveMiddleManExampleGoodExample.Department("Engineering", "Alice", 15);
+        RemoveMiddleManExampleGoodExample.Person person = new RemoveMiddleManExampleGoodExample.Person(dept);
         assertEquals("Engineering", person.getDepartment().getName());
         assertEquals(15, person.getDepartment().getHeadCount());
     }
 
     @Test
     void introduceForeignMethod_scheduleNextDay() {
-        IntroduceForeignMethodExample.GoodExample good = new IntroduceForeignMethodExample.GoodExample();
+        IntroduceForeignMethodExampleGoodExample good = new IntroduceForeignMethodExampleGoodExample();
         String result = good.scheduleNextMeeting(2024, 0, 15); // Jan 15
         assertTrue(result.contains("16"));
     }
 
     @Test
     void introduceLocalExtension_nextWeek() {
-        IntroduceLocalExtensionExample.GoodExample.MfDate date =
-            new IntroduceLocalExtensionExample.GoodExample.MfDate(2024, 1, 10);
-        IntroduceLocalExtensionExample.GoodExample.MfDate nextWeek = date.nextWeek();
+        IntroduceLocalExtensionExampleGoodExample.MfDate date =
+            new IntroduceLocalExtensionExampleGoodExample.MfDate(2024, 1, 10);
+        IntroduceLocalExtensionExampleGoodExample.MfDate nextWeek = date.nextWeek();
         assertTrue(nextWeek.format().contains("17"));
     }
 

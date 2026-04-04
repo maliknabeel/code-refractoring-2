@@ -65,45 +65,7 @@ public class FormTemplateMethodExample {
     public static class Customer {
         private final String name;
         public Customer(String name) { this.name = name; }
-        String getName() { return name; }
-        double getTotalCharge() { return 25.0; }
-    }
-
-    public static class BadExample {
-        public static class HtmlStatement {
-            public String value(Customer customer) {
-                return "<h1>Record for " + customer.getName() + "</h1>\nTotal: " + customer.getTotalCharge();
-            }
-        }
-
-        public static class TextStatement {
-            public String value(Customer customer) {
-                return "Record for " + customer.getName() + "\nTotal: " + customer.getTotalCharge();
-            }
-        }
-    }
-
-    public static class GoodExample {
-        abstract public static class Statement {
-            public final String value(Customer customer) {
-                return headerString(customer) + detailString(customer) + footerString(customer);
-            }
-
-            protected abstract String headerString(Customer customer);
-            protected abstract String detailString(Customer customer);
-            protected abstract String footerString(Customer customer);
-        }
-
-        public static class HtmlStatement extends Statement {
-            @Override protected String headerString(Customer c) { return "<h1>Record for " + c.getName() + "</h1>\n"; }
-            @Override protected String detailString(Customer c) { return "<ul><li>Details...</li></ul>\n"; }
-            @Override protected String footerString(Customer c) { return "<p>Total: " + c.getTotalCharge() + "</p>"; }
-        }
-
-        public static class TextStatement extends Statement {
-            @Override protected String headerString(Customer c) { return "Record for " + c.getName() + "\n"; }
-            @Override protected String detailString(Customer c) { return "  Details...\n"; }
-            @Override protected String footerString(Customer c) { return "Total: " + c.getTotalCharge(); }
-        }
+        public String getName() { return name; }
+        public double getTotalCharge() { return 25.0; }
     }
 }

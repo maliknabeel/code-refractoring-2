@@ -35,32 +35,4 @@ public class CollapseHierarchyExample {
                 // WebSite class deleted — its usages now use Party directly
                 """;
     }
-
-    public static class BadExample {
-        public static class Employee {
-            protected String name;
-            protected int    grade;
-            public Employee(String name, int grade) { this.name = name; this.grade = grade; }
-            public String getName()  { return name; }
-            public int    getGrade() { return grade; }
-        }
-
-        // ActiveEmployee adds nothing — empty subclass
-        public static class ActiveEmployee extends Employee {
-            public ActiveEmployee(String name, int grade) { super(name, grade); }
-            // No new fields, no overrides, no reason to exist
-        }
-    }
-
-    public static class GoodExample {
-        // Hierarchy collapsed — Employee handles everything
-        public static class Employee {
-            private final String name;
-            private final int    grade;
-
-            public Employee(String name, int grade) { this.name = name; this.grade = grade; }
-            public String getName()  { return name; }
-            public int    getGrade() { return grade; }
-        }
-    }
 }

@@ -36,40 +36,4 @@ public class ConsolidateDuplicateFragmentsExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        private double lastPrice = 100.0;
-        private int    sendCount = 0;
-
-        private void send() { sendCount++; }
-
-        public double getPrice(boolean isSpecialDeal) {
-            double price;
-            if (isSpecialDeal) {
-                price = lastPrice * 0.95;
-                send(); // duplicated
-            } else {
-                price = lastPrice * 0.98;
-                send(); // duplicated
-            }
-            return price;
-        }
-
-        public int getSendCount() { return sendCount; }
-    }
-
-    public static class GoodExample {
-        private double lastPrice = 100.0;
-        private int    sendCount = 0;
-
-        private void send() { sendCount++; }
-
-        public double getPrice(boolean isSpecialDeal) {
-            double price = isSpecialDeal ? lastPrice * 0.95 : lastPrice * 0.98;
-            send(); // called once
-            return price;
-        }
-
-        public int getSendCount() { return sendCount; }
-    }
 }

@@ -36,26 +36,4 @@ public class RemoveSettingMethodExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public static class Customer {
-            private String customerId;
-
-            public Customer(String customerId) { this.customerId = customerId; }
-
-            public void   setCustomerId(String id) { this.customerId = id; } // should not exist
-            public String getCustomerId()           { return customerId; }
-        }
-    }
-
-    public static class GoodExample {
-        public static class Customer {
-            private final String customerId; // final — can't be changed
-
-            public Customer(String customerId) { this.customerId = customerId; }
-
-            public String getCustomerId() { return customerId; }
-            // Setter intentionally absent
-        }
-    }
 }

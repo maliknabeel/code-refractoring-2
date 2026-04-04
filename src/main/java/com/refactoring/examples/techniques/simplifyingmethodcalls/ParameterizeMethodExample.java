@@ -29,24 +29,4 @@ public class ParameterizeMethodExample {
                 raise(10);  // replaces tenPercentRaise()
                 """;
     }
-
-    public static class BadExample {
-        private double salary = 50000;
-
-        public void fivePercentRaise()   { salary *= 1.05; }
-        public void tenPercentRaise()    { salary *= 1.10; }
-        public void fifteenPercentRaise(){ salary *= 1.15; }
-
-        public double getSalary() { return salary; }
-    }
-
-    public static class GoodExample {
-        private double salary = 50000;
-
-        public void raise(double percentageIncrease) {
-            salary *= (1.0 + percentageIncrease / 100.0);
-        }
-
-        public double getSalary() { return salary; }
-    }
 }

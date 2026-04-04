@@ -48,44 +48,4 @@ public class IntroduceNullObjectExample {
         String getName();
         String getPlan();
     }
-
-    public static class BadExample {
-        public String getCustomerName(Customer customer) {
-            if (customer == null) return "occupant";
-            return customer.getName();
-        }
-
-        public String getCustomerPlan(Customer customer) {
-            if (customer == null) return "BASIC";
-            return customer.getPlan();
-        }
-
-        public int getPlanCode(Customer customer) {
-            if (customer == null) return 0;
-            return customer.getPlan() != null ? 1 : 0;
-        }
-    }
-
-    public static class GoodExample {
-        public static class RealCustomer implements Customer {
-            private final String name;
-            private final String plan;
-            public RealCustomer(String name, String plan) { this.name = name; this.plan = plan; }
-            @Override public String getName() { return name; }
-            @Override public String getPlan() { return plan; }
-        }
-
-        // Null Object — provides safe defaults, no null checks needed by callers
-        public static class NullCustomer implements Customer {
-            @Override public String getName() { return "occupant"; }
-            @Override public String getPlan() { return "BASIC"; }
-        }
-
-        public static Customer getCustomer(boolean exists) {
-            return exists ? new RealCustomer("John", "PREMIUM") : new NullCustomer();
-        }
-
-        public String getCustomerName(Customer customer) { return customer.getName(); }
-        public String getCustomerPlan(Customer customer) { return customer.getPlan(); }
-    }
 }

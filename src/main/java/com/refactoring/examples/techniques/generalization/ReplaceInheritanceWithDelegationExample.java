@@ -40,31 +40,4 @@ public class ReplaceInheritanceWithDelegationExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        // MyStack extends java.util.Vector — wrong! Stack is NOT a Vector
-        public static class MyStack<T> extends java.util.Vector<T> {
-            public void pushItem(T item) { addElement(item); }
-            public T popItem() {
-                T last = lastElement();
-                removeElementAt(size() - 1);
-                return last;
-            }
-            // Inherits add(0, item), set(index, item) etc. — violates stack abstraction
-        }
-    }
-
-    public static class GoodExample {
-        // MyStack delegates to a list — only exposes stack operations
-        public static class MyStack<T> {
-            private final java.util.Deque<T> storage = new java.util.ArrayDeque<>();
-
-            public void  push(T item)  { storage.push(item); }
-            public T     pop()         { return storage.pop(); }
-            public T     peek()        { return storage.peek(); }
-            public boolean isEmpty()   { return storage.isEmpty(); }
-            public int   size()        { return storage.size(); }
-            // No set(index, item) — stack protocol enforced via composition
-        }
-    }
 }

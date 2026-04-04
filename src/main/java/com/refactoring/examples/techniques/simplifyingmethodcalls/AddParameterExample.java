@@ -37,18 +37,4 @@ public class AddParameterExample {
                 }
                 """;
     }
-
-    public static class BadExample {
-        public String formatDate(int day, int month, int year) {
-            // Always uses "-" separator — no flexibility
-            return day + "-" + month + "-" + year;
-        }
-    }
-
-    public static class GoodExample {
-        public String formatDate(int day, int month, int year, String separator) {
-            // Caller can now choose the separator
-            return day + separator + month + separator + year;
-        }
-    }
 }

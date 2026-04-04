@@ -39,36 +39,16 @@ public class ConsolidateConditionalExample {
     }
 
     public static class Employee {
-        int     seniority;
-        int     monthsDisabled;
-        boolean isPartTime;
-        double  baseSalary;
+        public int     seniority;
+        public int     monthsDisabled;
+        public boolean isPartTime;
+        public double  baseSalary;
 
         public Employee(int seniority, int monthsDisabled, boolean isPartTime, double baseSalary) {
             this.seniority = seniority;
             this.monthsDisabled = monthsDisabled;
             this.isPartTime = isPartTime;
             this.baseSalary = baseSalary;
-        }
-    }
-
-    public static class BadExample {
-        public double disabilityAmount(Employee e) {
-            if (e.seniority < 2)        return 0;
-            if (e.monthsDisabled > 12)  return 0;
-            if (e.isPartTime)           return 0;
-            return e.baseSalary * 0.6;
-        }
-    }
-
-    public static class GoodExample {
-        private boolean isNotEligibleForDisability(Employee e) {
-            return e.seniority < 2 || e.monthsDisabled > 12 || e.isPartTime;
-        }
-
-        public double disabilityAmount(Employee e) {
-            if (isNotEligibleForDisability(e)) return 0;
-            return e.baseSalary * 0.6;
         }
     }
 }
