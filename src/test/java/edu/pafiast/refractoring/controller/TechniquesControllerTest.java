@@ -25,7 +25,7 @@ class TechniquesControllerTest {
 
     @Test
     void getCategories_containsAllExpectedCategories() {
-        Map<String, List<String>> categories = controller.getCategories();
+        Map<String, List<RefactoringTechniqueResponse>> categories = controller.getCategories();
         assertTrue(categories.containsKey("Composing Methods"));
         assertTrue(categories.containsKey("Moving Features Between Objects"));
         assertTrue(categories.containsKey("Organizing Data"));

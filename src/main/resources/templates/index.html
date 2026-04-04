@@ -46,14 +46,17 @@
         </div>
 
         <div th:if="${!isSearch}">
-            <div th:each="categoryEntry : ${categories}" class="category-section">
-                <h2 class="section-title" th:text="${categoryEntry.key}">Category</h2>
+            <div th:each="categoryEntry : ${categories}" class="category-section collapsed">
+                <div class="category-header" onclick="this.parentElement.classList.toggle('collapsed')">
+                    <h2 class="section-title" th:text="${categoryEntry.key}">Category</h2>
+                    <span class="toggle-icon">▼</span>
+                </div>
                 <div class="grid-container">
-                    <a th:each="name : ${categoryEntry.value}" 
-                       th:href="@{'/technique/' + ${#strings.replace(#strings.toLowerCase(name), ' ', '-')}}" 
+                    <a th:each="technique : ${categoryEntry.value}" 
+                       th:href="@{'/technique/' + ${#strings.replace(#strings.toLowerCase(technique.name), ' ', '-')}}" 
                        class="card">
-                        <h3 class="card-title" th:text="${name}">Technique Name</h3>
-                        <p class="card-desc">Click to view comparison and learn how to apply this technique.</p>
+                        <h3 class="card-title" th:text="${technique.name}">Technique Name</h3>
+                        <p class="card-desc" th:text="${technique.description}">Click to view comparison and learn how to apply this technique.</p>
                         <div class="card-footer">
                             <span class="explore-btn">Learn More →</span>
                         </div>

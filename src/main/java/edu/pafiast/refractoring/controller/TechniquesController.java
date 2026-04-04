@@ -48,10 +48,10 @@ public class TechniquesController {
     }
 
     @GetMapping("/categories")
-    public Map<String, List<String>> getCategories() {
-        Map<String, List<String>> categories = new LinkedHashMap<>();
+    public Map<String, List<RefactoringTechniqueResponse>> getCategories() {
+        Map<String, List<RefactoringTechniqueResponse>> categories = new LinkedHashMap<>();
         for (RefactoringTechniqueResponse t : getAllTechniques()) {
-            categories.computeIfAbsent(t.getCategory(), k -> new ArrayList<>()).add(t.getName());
+            categories.computeIfAbsent(t.getCategory(), k -> new ArrayList<>()).add(t);
         }
         return categories;
     }
