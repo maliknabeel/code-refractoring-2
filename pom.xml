@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.refactoring</groupId>
+    <groupId>edu.pafiast.refractoring</groupId>
     <artifactId>code-refactoring-examples</artifactId>
     <version>1.0.0</version>
     <name>Code Refactoring Examples</name>
