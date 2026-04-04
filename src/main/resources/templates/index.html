@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Refactoring Techniques</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Refactoring<span class="highlight">Lab</span></span>
+            </a>
+            <div class="search-container">
+                <form action="/" method="get">
+                    <input type="text" name="q" placeholder="Search techniques..." th:value="${searchQuery}" class="search-input">
+                    <button type="submit" class="search-btn">🔍</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>Learn Code Refactoring</h1>
+            <p>Master the art of improving code structure without changing its external behavior.</p>
+        </header>
+
+        <div th:if="${isSearch}">
+            <h2 class="section-title">Search Results</h2>
+            <div th:if="${#lists.isEmpty(techniques)}" class="empty-state">
+                <p>No techniques found matching your query.</p>
+            </div>
+            <div class="grid-container">
+                <a th:each="technique : ${techniques}" 
+                   th:href="@{'/technique/' + ${#strings.replace(#strings.toLowerCase(technique.name), ' ', '-')}}" 
+                   class="card">
+                    <div class="card-badge" th:text="${technique.category}">Category</div>
+                    <h3 class="card-title" th:text="${technique.name}">Technique Name</h3>
+                    <p class="card-desc" th:text="${technique.description}">Description</p>
+                </a>
+            </div>
+        </div>
+
+        <div th:if="${!isSearch}">
+            <div th:each="categoryEntry : ${categories}" class="category-section">
+                <h2 class="section-title" th:text="${categoryEntry.key}">Category</h2>
+                <div class="grid-container">
+                    <a th:each="name : ${categoryEntry.value}" 
+                       th:href="@{'/technique/' + ${#strings.replace(#strings.toLowerCase(name), ' ', '-')}}" 
+                       class="card">
+                        <h3 class="card-title" th:text="${name}">Technique Name</h3>
+                        <p class="card-desc">Click to view comparison and learn how to apply this technique.</p>
+                        <div class="card-footer">
+                            <span class="explore-btn">Learn More →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; BS SE 6th Semester Teaching Platform. Designed with modern aesthetics.</p>
+    </footer>
+</body>
+</html>
