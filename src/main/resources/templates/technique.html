@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${comparison.techniqueName} + ' - Refactoring Lab'">Refactoring Technique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">Refactoring<span class="highlight">Lab</span></span>
+            </a>
+            <a href="/" class="back-link">← Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="technique-header">
+            <span class="badge" th:text="${comparison.category}">Category</span>
+            <h1 class="technique-title" th:text="${comparison.techniqueName}">Technique Name</h1>
+            <p>Analyze how this technique improves code quality, readability, and maintainability.</p>
+        </div>
+
+        <div class="comparison-container">
+            <!-- Bad Code Section -->
+            <div class="code-panel">
+                <div class="panel-header bad">
+                    <span class="panel-icon">❌</span>
+                    <h3>Before (Bad Smell)</h3>
+                    <button class="copy-btn" onclick="copyCode('bad-code')">Copy</button>
+                </div>
+                <div class="code-wrapper">
+                    <pre><code class="language-java" id="bad-code" th:text="${comparison.badCode}">// Base code here</code></pre>
+                </div>
+            </div>
+
+            <!-- Good Code Section -->
+            <div class="code-panel">
+                <div class="panel-header good">
+                    <span class="panel-icon">✅</span>
+                    <h3>After (Refactored)</h3>
+                    <button class="copy-btn" onclick="copyCode('good-code')">Copy</button>
+                </div>
+                <div class="code-wrapper">
+                    <pre><code class="language-java" id="good-code" th:text="${comparison.goodCode}">// Refactored code here</code></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; BS SE 6th Semester Teaching Platform.</p>
+    </footer>
+
+    <!-- Prism.js syntax highlighter scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script>
+        function copyCode(elementId) {
+            const codeEl = document.getElementById(elementId);
+            navigator.clipboard.writeText(codeEl.textContent).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
