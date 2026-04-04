@@ -1,7 +1,6 @@
 package com.refactoring.examples.techniques.organizingdata.bad;
 
 import com.refactoring.examples.techniques.organizingdata.*;
-import com.refactoring.examples.techniques.organizingdata.EncapsulateFieldExample.*;
 
 public class EncapsulateFieldExampleBadExample {
     public static class Person {
